@@ -1,0 +1,36 @@
+version: '3'
+
+# начинаем с определения списка сервисов(контейнеров, которые хотим запустить как часть нашего приложения
+services:
+  # определяем сервис и образ для контейнера (имя может быть любое, например app)
+  app:
+    build:
+      # билдить можно из котекста или использовать готовый образ (image)
+      context: .
+    container_name: tasklist
+    # depends_on выражает зависимости между запуском и завершением работы между сервисами
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL = jdbc:postgresql://db:${PORT}/${POSTGRES_DATABASE}?currentSchema=${POSTGRES_SCHEMA}
+      - SPRING_DATASOURCE_USERNAME = ${POSTGRES_USERNAME}
+      - SPRING_DATASOURCE_PASSWORD = ${POSTGRES_PASSWORD}
+    #Пробрасываем порт (из нашей машины 8080 в 8080 в контейнере)
+    ports:
+      - '8080:8080'
+
+  #https://hub.docker.com/_/postgres
+  #https://spring.io/blog/2023/06/21/docker-compose-support-in-spring-boot-3-1
+  db:
+    image: postgres:15.1-alpine
+    container_name: postgres
+    ports:
+      - ${PORT}
+    environment:
+      - POSTGRES_USER = ${POSTGRES_USERNAME}
+      - POSTGRES_DB = {POSTGRES_DATABASE}
+      - POSTGRES_PASSWORD = ${POSTGRES_PASSWORD}
+    volumes:
+      # :/docker-entrypoint-initdb.d - скрипт для инициализации (запустит скрипт по созданию схемы)
+      - ./src/main/resources/db-init:/docker-entrypoint-initdb.d
+
