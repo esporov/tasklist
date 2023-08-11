@@ -21,7 +21,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/users")
 @Validated
-@Tag(name = "Auth Controller", description = "Auth API")
+@Tag(name = "User Controller", description = "User API")
 public class UserController {
 
     private final UserService userService;

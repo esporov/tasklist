@@ -30,7 +30,7 @@ public class JwtUtil {
     private final JwtUserDetailsService jwtUserDetailsService;
 
     public String generateAccessToken(Long userId, String username, Set<Role> roles) {
-        var duration = Duration.ofMinutes(jwtProperties.getAccess());
+        var duration = Duration.ofHours(jwtProperties.getAccess());
         var expirationDate = Instant.now().plus(duration);
 
         return JWT.create()
@@ -45,7 +45,7 @@ public class JwtUtil {
     }
 
     public String generateRefreshToken(Long userId, String username) {
-        var duration = Duration.ofMinutes(jwtProperties.getRefresh());
+        var duration = Duration.ofHours(jwtProperties.getRefresh());
         var expirationDate = Instant.now().plus(duration);
 
         return JWT.create()
