@@ -138,12 +138,12 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/net.lbruun.springboot/preliquibase-spring-boot-starter -->
+        <!-- https://mvnrepository.com/artifact/net.lbruun.springboot/preliquibase-spring-boot-starter
         <dependency>
             <groupId>net.lbruun.springboot</groupId>
             <artifactId>preliquibase-spring-boot-starter</artifactId>
             <version>1.4.0</version>
-        </dependency>
+        </dependency>-->
 
 
 

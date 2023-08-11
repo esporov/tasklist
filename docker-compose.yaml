@@ -28,7 +28,7 @@ services:
       - ${PORT}
     environment:
       - POSTGRES_USER = ${POSTGRES_USERNAME}
-      - POSTGRES_DB = {POSTGRES_DATABASE}
+      - POSTGRES_DB = ${POSTGRES_DATABASE}
       - POSTGRES_PASSWORD = ${POSTGRES_PASSWORD}
     volumes:
       # :/docker-entrypoint-initdb.d - скрипт для инициализации (запустит скрипт по созданию схемы)
