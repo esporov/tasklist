@@ -1,5 +1,6 @@
 package com.example.tasklist.service.impl;
 
+import com.example.tasklist.domain.exception.AccessDeniedException;
 import com.example.tasklist.domain.user.User;
 import com.example.tasklist.service.AuthService;
 import com.example.tasklist.service.UserService;
@@ -7,6 +8,7 @@ import com.example.tasklist.web.dto.auth.JwtRequest;
 import com.example.tasklist.web.dto.auth.JwtResponse;
 import com.example.tasklist.web.security.JwtUtil;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -29,7 +31,7 @@ public class AuthServiceImpl implements AuthService {
         try {
             authenticationManager.authenticate(authenticationToken);
         } catch (BadCredentialsException e) {
-
+            e.printStackTrace();
         }
         var user = userService.getByUserName(loginRequest.getUsername());
         jwtResponse.setId(user.getId());
